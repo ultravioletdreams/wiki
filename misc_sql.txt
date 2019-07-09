@@ -1,0 +1,31 @@
+SELECT a.assetid,mda.contextid,SUBSTRING(mda.value,1,20),mdb.contextid,SUBSTRING(mdb.value,1,20)
+FROM sq_ast_mdata_val AS mda
+LEFT JOIN sq_ast_mdata_val AS mdb ON mda.assetid = mdb.assetid AND mda.fieldid = mdb.fieldid AND mda.contextid = 5 AND mdb.contextid = 6
+INNER JOIN sq_ast AS a ON mda.assetid = a.assetid
+WHERE mda.value <> mdb.value
+AND mda.fieldid = '155236'
+AND a.status = 16;
+
+
+********************************************
+
+SELECT
+a.assetid AS fix_assetid,
+a.name,
+l.minorid AS target_assetid,
+child.name
+
+FROM sq_ast AS a
+INNER JOIN sq_ast_lnk AS l ON l.majorid = a.assetid
+INNER JOIN sq_ast AS child ON l.minorid = child.assetid
+WHERE child.type_code = 'link'
+AND a.assetid IN
+(SELECT a.assetid
+FROM sq_ast_mdata_val AS mda
+LEFT JOIN sq_ast_mdata_val AS mdb ON mda.assetid = mdb.assetid AND mda.fieldid = mdb.fieldid AND mda.contextid = 5 AND mdb.contextid = 6
+INNER JOIN sq_ast AS a ON mda.assetid = a.assetid
+WHERE mda.value <> mdb.value
+AND mda.fieldid = '155236'
+AND a.status = 16)
+ORDER BY a.assetid
+
