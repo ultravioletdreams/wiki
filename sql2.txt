@@ -1,0 +1,14 @@
+SELECT a.assetid,a.name,mdv.contextid,mdv.fieldid,value,mdv.use_default,mddv.default_val
+FROM sq_ast AS a
+LEFT JOIN sq_ast_mdata_val AS mdv ON a.assetid = mdv.assetid
+LEFT JOIN sq_ast_mdata_dflt_val AS mddv ON mdv.fieldid = mddv.assetid
+WHERE a.assetid IN ('302','306','315')
+ORDER BY a.assetid;
+
+
+ SELECT a.name,mdsa.name,mdsl.minorid,mdfl.minorid,mdfa.name
+FROM sq_ast AS a
+LEFT JOIN sq_ast_lnk AS mdsl ON a.assetid = mdsl.majorid
+LEFT JOIN sq_ast     AS mdsa ON mdsl.minorid = mdsa.assetid
+LEFT JOIN sq_ast_lnk AS mdfl ON mdsl.minorid = mdfl.majorid
+LEFT JOIN sq_ast     AS mdfa ON mdfl.minorid = mdfa.assetid
