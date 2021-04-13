@@ -6,5 +6,5 @@
 * **2021** - *ultravioletdreams/uv_bash*   - Updated uv_bash scripts for Centos8 and general refresh and simplification.
 * **2021** - *ultravioletdreams/uv_puppet* - Updated, Simplify, Refresh  Puppet environment, manifests and hiera.
 ---
-\*\*\* END WIKI \*\*\*
+#### END WIKI
 ---
